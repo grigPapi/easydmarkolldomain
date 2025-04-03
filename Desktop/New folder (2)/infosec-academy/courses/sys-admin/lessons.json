@@ -1,0 +1,82 @@
+[
+  {
+    "id": "windows10-msi-installation",
+    "title": "Установка обычных программ на Windows 10 - MSI файл",
+    "url": "/courses/sys-admin/windows10-msi-installation.html",
+    "description": "Научитесь устанавливать программы через MSI-файлы в Windows 10, понимать их особенности и преимущества.",
+    "duration": 6,
+    "difficulty": "Начальный уровень"
+  },
+  {
+    "id": "windows10-store-apps",
+    "title": "Установка программ из магазина Microsoft - Universal Apps",
+    "url": "/courses/sys-admin/windows10-store-apps.html",
+    "description": "Изучите установку и управление приложениями из Microsoft Store в Windows 10.",
+    "duration": 12,
+    "difficulty": "Начальный уровень"
+  },
+  {
+    "id": "windows10-user-profiles",
+    "title": "Папки профиля пользователя в Windows 10",
+    "url": "/courses/sys-admin/windows10-user-profiles.html",
+    "description": "Детальное изучение структуры и назначения папок профиля пользователя в Windows 10.",
+    "duration": 14,
+    "difficulty": "Начальный уровень"
+  },
+  {
+    "id": "windows10-user-creation",
+    "title": "Создание пользователя в Windows 10",
+    "url": "/courses/sys-admin/windows10-user-creation.html",
+    "description": "Узнайте, как создавать и настраивать учетные записи пользователей в Windows 10.",
+    "duration": 35,
+    "difficulty": "Начальный уровень"
+  },
+  {
+    "id": "windows10-autologon",
+    "title": "Автоматический вход в Windows 10 - Autologon",
+    "url": "/courses/sys-admin/windows10-autologon.html",
+    "description": "Научитесь настраивать автоматический вход в систему без ввода пароля.",
+    "duration": 11,
+    "difficulty": "Средний уровень"
+  },
+  {
+    "id": "windows10-password-reset",
+    "title": "Как сбросить пароль Windows 10",
+    "url": "/courses/sys-admin/windows10-password-reset.html",
+    "description": "Различные методы сброса пароля в Windows 10, включая встроенные средства и сторонние инструменты.",
+    "duration": 11,
+    "difficulty": "Начальный уровень"
+  },
+  {
+    "id": "windows10-efs-encryption",
+    "title": "Как зашифровать файлы и папки используя EFS в Windows 10",
+    "url": "/courses/sys-admin/windows10-efs-encryption.html",
+    "description": "Научитесь защищать данные с помощью шифрования файловой системы (EFS).",
+    "duration": 16,
+    "difficulty": "Средний уровень"
+  },
+  {
+    "id": "windows10-bitlocker",
+    "title": "Шифрование системного диска C в Windows 10 - Bitlocker и TPM",
+    "url": "/courses/sys-admin/windows10-bitlocker.html",
+    "description": "Подробное руководство по настройке шифрования диска BitLocker с использованием TPM.",
+    "duration": 20,
+    "difficulty": "Средний уровень"
+  },
+  {
+    "id": "tcpip-wireshark-install",
+    "title": "Модель TCP/IP Wireshark Установка",
+    "url": "/courses/sys-admin/tcpip-wireshark-install.html",
+    "description": "Установка и первоначальная настройка Wireshark для анализа сетевого трафика.",
+    "duration": 7,
+    "difficulty": "Начальный уровень"
+  },
+  {
+    "id": "tcpip-application-layer",
+    "title": "Модель TCP/IP Уровень приложения",
+    "url": "/courses/sys-admin/tcpip-application-layer.html",
+    "description": "Изучение принципов работы уровня приложения в модели TCP/IP.",
+    "duration": 6,
+    "difficulty": "Средний уровень"
+  }
+]

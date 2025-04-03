@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Метаданные страницы для шаблонизатора -->
+    <meta name="page-title" content="НАЗВАНИЕ_КУРСА">
+    <meta name="page-description" content="ОПИСАНИЕ_КУРСА">
+    <meta name="page-course-id" content="ИДЕНТИФИКАТОР_КУРСА">
+    <meta name="page-section" content="courses">
+    <meta name="page-breadcrumbs" content='[{"title":"Курсы","url":"/pages/courses.html"},{"title":"НАЗВАНИЕ_КУРСА"}]'>
+    
+    <title>НАЗВАНИЕ_КУРСА | InfoSec Academy</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/course.css">
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header id="header-container">
+        <!-- Сюда будет загружен компонент шапки -->
+    </header>
+    
+    <div class="breadcrumbs" id="breadcrumbs-container">
+        <!-- Сюда будет загружен компонент хлебных крошек -->
+    </div>
+    
+    <div class="container">
+        <main class="course-content">
+            <div class="course-header">
+                <div class="course-icon">🔐</div>
+                <div class="course-header-content">
+                    <h1>НАЗВАНИЕ_КУРСА</h1>
+                    <p class="course-description">ОПИСАНИЕ_КУРСА</p>
+                    
+                    <div class="course-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">📚</span>
+                            <span><span id="lessons-count">10</span> уроков</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span><span id="total-duration">0</span> минут</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🏆</span>
+                            <span>СЕРТИФИКАЦИЯ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="course-details">
+                <div class="course-tabs">
+                    <button class="tab-button active" data-tab="overview">Обзор курса</button>
+                    <button class="tab-button" data-tab="content">Содержание</button>
+                    <button class="tab-button" data-tab="requirements">Требования</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="overview">
+                        <h2>О курсе</h2>
+                        <p>ПОДРОБНОЕ_ОПИСАНИЕ_КУРСА</p>
+                        
+                        <h3>Чему вы научитесь</h3>
+                        <ul class="course-benefits">
+                            <li>ПОЛЬЗА_1</li>
+                            <li>ПОЛЬЗА_2</li>
+                            <li>ПОЛЬЗА_3</li>
+                            <li>ПОЛЬЗА_4</li>
+                            <li>ПОЛЬЗА_5</li>
+                        </ul>
+                        
+                        <h3>Для кого этот курс</h3>
+                        <ul class="course-audience">
+                            <li>АУДИТОРИЯ_1</li>
+                            <li>АУДИТОРИЯ_2</li>
+                            <li>АУДИТОРИЯ_3</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-pane" id="content">
+                        <h2>Программа курса</h2>
+                        <div class="course-curriculum">
+                            <!-- Список уроков будет загружен динамически -->
+                            <div class="loading-indicator">Загрузка содержания курса...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="requirements">
+                        <h2>Требования к курсу</h2>
+                        <ul class="course-requirements">
+                            <li>ТРЕБОВАНИЕ_1</li>
+                            <li>ТРЕБОВАНИЕ_2</li>
+                            <li>ТРЕБОВАНИЕ_3</li>
+                        </ul>
+                        
+                        <h3>Рекомендуемое программное обеспечение</h3>
+                        <ul class="course-software">
+                            <li>СОФТ_1</li>
+                            <li>СОФТ_2</li>
+                            <li>СОФТ_3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="course-cta">
+                <h2>Готовы начать обучение?</h2>
+                <p>Присоединяйтесь к сотням студентов, уже прошедших этот курс</p>
+                <a href="#content" class="btn btn-primary">Начать бесплатное обучение</a>
+            </div>
+            
+            <div class="teacher-section">
+                <h2>Преподаватель курса</h2>
+                <div class="teacher-card">
+                    <div class="teacher-avatar">ПР</div>
+                    <div class="teacher-info">
+                        <h3>ИМЯ_ПРЕПОДАВАТЕЛЯ</h3>
+                        <p class="teacher-position">ДОЛЖНОСТЬ_ПРЕПОДАВАТЕЛЯ</p>
+                        <p class="teacher-bio">БИОГРАФИЯ_ПРЕПОДАВАТЕЛЯ</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="related-courses">
+                <h2>Похожие курсы</h2>
+                <div class="related-courses-grid">
+                    <!-- Список рекомендуемых курсов будет добавлен динамически -->
+                    <div class="loading-indicator">Загрузка рекомендаций...</div>
+                </div>
+            </div>
+        </main>
+        
+        <aside class="course-sidebar">
+            <div class="course-info-card">
+                <div class="course-info-header">
+                    <h3>Информация о курсе</h3>
+                </div>
+                <div class="course-info-content">
+                    <ul class="course-info-list">
+                        <li>
+                            <div class="info-icon">📆</div>
+                            <div class="info-text">
+                                <strong>Последнее обновление</strong>
+                                <span>ДАТА_ОБНОВЛЕНИЯ</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="info-icon">👥</div>
+                            <div class="info-text">
+                                <strong>Студентов</strong>
+                                <span>КОЛИЧЕСТВО_СТУДЕНТОВ</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="info-icon">🏆</div>
+                            <div class="info-text">
+                                <strong>Сертификация</strong>
+                                <span>СЕРТИФИКАЦИЯ</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="info-icon">💰</div>
+                            <div class="info-text">
+                                <strong>Стоимость</strong>
+                                <span>Бесплатно</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="course-info-footer">
+                    <a href="#content" class="btn btn-primary btn-block">Начать обучение</a>
+                    <button class="btn btn-outline btn-block">Добавить в избранное</button>
+                </div>
+            </div>
+            
+            <div class="progress-card">
+                <h3>Ваш прогресс</h3>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+                <div class="progress-text">0% завершено</div>
+                <a href="#" class="last-lesson">Продолжить обучение</a>
+            </div>
+        </aside>
+    </div>
+    
+    <footer id="footer-container">
+        <!-- Сюда будет загружен компонент подвала -->
+    </footer>
+
+    <div id="back-to-top" title="Наверх">↑</div>
+
+    <!-- Скрипты -->
+    <script src="/js/templates.js"></script>
+    <script src="/js/course.js"></script>
+</body>
+</html>

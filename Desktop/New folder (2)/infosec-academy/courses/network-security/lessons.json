@@ -1,0 +1,82 @@
+[
+    {
+      "id": "intro",
+      "title": "Введение в сетевую безопасность",
+      "url": "/courses/network-security/intro.html",
+      "description": "Вводный урок о основах сетевой безопасности и важности защиты сетевой инфраструктуры.",
+      "duration": 5,
+      "difficulty": "Начальный уровень"
+    },
+    {
+      "id": "osi-model",
+      "title": "Модель OSI и безопасность",
+      "url": "/courses/network-security/osi-model.html",
+      "description": "Подробное рассмотрение модели OSI и аспектов безопасности на каждом уровне.",
+      "duration": 8,
+      "difficulty": "Начальный уровень"
+    },
+    {
+      "id": "tcpip-basics",
+      "title": "Модель TCP/IP - основы",
+      "url": "/courses/network-security/tcpip-basics.html",
+      "description": "Основы модели TCP/IP, её структура, компоненты и принципы работы.",
+      "duration": 7,
+      "difficulty": "Начальный уровень"
+    },
+    {
+      "id": "tcpip-application-layer",
+      "title": "Уровень приложения TCP/IP",
+      "url": "/courses/network-security/tcpip-application-layer.html",
+      "description": "Детальное изучение уровня приложения модели TCP/IP и его протоколов.",
+      "duration": 6,
+      "difficulty": "Средний уровень"
+    },
+    {
+      "id": "tcpip-ip-layer",
+      "title": "Уровень IP",
+      "url": "/courses/network-security/tcpip-ip-layer.html",
+      "description": "Изучение интернет-уровня (уровня IP) модели TCP/IP и его протоколов.",
+      "duration": 10,
+      "difficulty": "Средний уровень"
+    },
+    {
+      "id": "tcp-vs-udp",
+      "title": "TCP и UDP - сравнение",
+      "url": "/courses/network-security/tcp-vs-udp.html",
+      "description": "Сравнение протоколов TCP и UDP, их преимущества, недостатки и области применения.",
+      "duration": 8,
+      "difficulty": "Средний уровень"
+    },
+    {
+      "id": "udp-protocol",
+      "title": "Протокол UDP",
+      "url": "/courses/network-security/udp-protocol.html",
+      "description": "Углубленное изучение протокола UDP и его безопасности.",
+      "duration": 9,
+      "difficulty": "Средний уровень"
+    },
+    {
+      "id": "wireshark-intro",
+      "title": "Введение в Wireshark",
+      "url": "/courses/network-security/wireshark-intro.html",
+      "description": "Основы работы с программой Wireshark для анализа сетевого трафика.",
+      "duration": 12,
+      "difficulty": "Продвинутый уровень"
+    },
+    {
+      "id": "ports-explained",
+      "title": "Порты в компьютере",
+      "url": "/courses/network-security/ports-explained.html",
+      "description": "Объяснение концепции портов, их типов и значения в сетевой безопасности.",
+      "duration": 13,
+      "difficulty": "Средний уровень"
+    },
+    {
+      "id": "network-security-advanced",
+      "title": "Продвинутые темы сетевой безопасности",
+      "url": "/courses/network-security/network-security-advanced.html",
+      "description": "Обзор продвинутых тем и методов обеспечения сетевой безопасности.",
+      "duration": 15,
+      "difficulty": "Продвинутый уровень"
+    }
+  ]

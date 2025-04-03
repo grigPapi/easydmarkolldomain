@@ -1,0 +1,25 @@
+<!-- Шаблон боковой панели для уроков -->
+<div class="lesson-sidebar">
+    <div class="course-progress">
+        <div class="progress-bar">
+            <div class="progress-bar-fill" style="width: var(--progress-percentage, 0%);"></div>
+        </div>
+        <div class="progress-text"><span data-variable="progress-text">0 из 0 уроков (0%)</span></div>
+    </div>
+    
+    <div class="lesson-navigation">
+        <h3>Содержание курса</h3>
+        <ul id="course-lessons-list">
+            <!-- Список уроков будет динамически загружен из lessons.json -->
+            <li><a href="#" class="lesson-loading-placeholder">Загрузка уроков...</a></li>
+        </ul>
+    </div>
+    
+    <div class="toc-menu">
+        <h3>Оглавление урока</h3>
+        <ul id="lesson-toc">
+            <!-- Оглавление будет генерироваться автоматически на основе заголовков в уроке -->
+            <li><a href="#" class="toc-loading-placeholder">Загрузка оглавления...</a></li>
+        </ul>
+    </div>
+</div>

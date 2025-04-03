@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Метаданные страницы для шаблонизатора -->
+    <meta name="page-title" content="Главная страница">
+    <meta name="page-description" content="Практические курсы по кибербезопасности, администрированию и защите информационных систем">
+    <meta name="page-section" content="home">
+    
+    <title>InfoSec Academy - Обучение информационной безопасности</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Дополнительные скрипты для главной страницы -->
+    <script src="/js/home.js" defer></script>
+</head>
+<body>
+    <header id="header-container">
+        <!-- Сюда будет загружен компонент шапки -->
+    </header>
+    
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Практическое обучение информационной безопасности</h1>
+            <p>От опытных экспертов для новичков и профессионалов. Начните свой путь к карьере в области кибербезопасности сегодня!</p>
+            <div class="hero-buttons">
+                <a href="#courses" class="btn btn-primary">Начать обучение</a>
+                <a href="#featured" class="btn btn-secondary">Популярные курсы</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="featured" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Рекомендуемые курсы</h2>
+                <p>Самые популярные направления обучения в области информационной безопасности</p>
+            </div>
+            
+            <div class="featured-courses" id="featured-courses-container">
+                <!-- Рекомендуемые курсы будут загружены динамически -->
+                <div class="loading-indicator">Загрузка популярных курсов...</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="courses" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>Все курсы</h2>
+                <p>Выберите направление обучения и начните свой путь в мире информационной безопасности</p>
+            </div>
+            
+            <div class="course-grid" id="all-courses-container">
+                <!-- Все курсы будут загружены динамически -->
+                <div class="loading-indicator">Загрузка курсов...</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="topics" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Популярные темы</h2>
+                <p>Изучите конкретные аспекты информационной безопасности</p>
+            </div>
+            
+            <div class="topics-list">
+                <div class="topic-item">
+                    <div class="topic-header">
+                        <h3>Сетевая безопасность</h3>
+                        <span class="topic-toggle">+</span>
+                    </div>
+                    <div class="topic-content">
+                        <ul class="lesson-list">
+                            <li class="lesson-item">
+                                <a href="/courses/network-security/tcpip-basics.html" class="lesson-link">
+                                    <span>Модель TCP/IP - основы</span>
+                                    <span class="lesson-duration">7 минут</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/network-security/tcpip-application-layer.html" class="lesson-link">
+                                    <span>Модель TCP/IP - уровень приложения</span>
+                                    <span class="lesson-duration">6 минут</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/network-security/tcpip-ip-layer.html" class="lesson-link">
+                                    <span>Модель TCP/IP - уровень IP</span>
+                                    <span class="lesson-duration">10 минут</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/network-security/tcp-vs-udp.html" class="lesson-link">
+                                    <span>TCP и UDP - сравнение</span>
+                                    <span class="lesson-duration">8 минут</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/network-security/ports-explained.html" class="lesson-link">
+                                    <span>Что такое порт в компьютере</span>
+                                    <span class="lesson-duration">13 минут</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <a href="/courses/network-security/index.html" class="btn btn-sm btn-outline topic-view-all">Все уроки по теме</a>
+                    </div>
+                </div>
+                
+                <div class="topic-item">
+                    <div class="topic-header">
+                        <h3>NTFS и файловая система</h3>
+                        <span class="topic-toggle">+</span>
+                    </div>
+                    <div class="topic-content">
+                        <ul class="lesson-list">
+                            <li class="lesson-item">
+                                <a href="/courses/sys-admin/ntfs-permissions.html" class="lesson-link">
+                                    <span>Права доступа в NTFS</span>
+                                    <span class="lesson-duration">14 минут</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/sys-admin/ntfs-intro.html" class="lesson-link">
+                                    <span>Учимся за 3 минуты - NTFS</span>
+                                    <span class="lesson-duration">4 минуты</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/sys-admin/ntfs-ownership.html" class="lesson-link">
+                                    <span>Смена владельца файлов в NTFS</span>
+                                    <span class="lesson-duration">15 минут</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/sys-admin/ntfs-bypass.html" class="lesson-link">
+                                    <span>Как обойти права доступа в NTFS</span>
+                                    <span class="lesson-duration">20 минут</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/sys-admin/ntfs-vs-fat32.html" class="lesson-link">
+                                    <span>Отличие NTFS от FAT32 и от exFAT</span>
+                                    <span class="lesson-duration">25 минут</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <a href="/courses/sys-admin/index.html" class="btn btn-sm btn-outline topic-view-all">Все уроки по теме</a>
+                    </div>
+                </div>
+                
+                <div class="topic-item">
+                    <div class="topic-header">
+                        <h3>Взлом и защита</h3>
+                        <span class="topic-toggle">+</span>
+                    </div>
+                    <div class="topic-content">
+                        <ul class="lesson-list">
+                            <li class="lesson-item">
+                                <a href="/courses/hacking/pass-the-hash.html" class="lesson-link">
+                                    <span>Атака Pass-The-Hash</span>
+                                    <span class="lesson-duration">14 минут</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/hacking/wifi-cracking.html" class="lesson-link">
+                                    <span>Взлом Wi-Fi пароля wpa2</span>
+                                    <span class="lesson-duration">33 минуты</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/hacking/brute-force.html" class="lesson-link">
+                                    <span>Брутфорс - взлом пароля путём перебора</span>
+                                    <span class="lesson-duration">15 минут</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/hacking/mimikatz.html" class="lesson-link">
+                                    <span>Взлом пароля в Windows 10 - mimikatz</span>
+                                    <span class="lesson-duration">20 минут</span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="/courses/hacking/trojan-encryption.html" class="lesson-link">
+                                    <span>Обход антивируса - Шифрование трояна</span>
+                                    <span class="lesson-duration">27 минут</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <a href="/courses/hacking/index.html" class="btn btn-sm btn-outline topic-view-all">Все уроки по теме</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="testimonials" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>Отзывы наших студентов</h2>
+                <p>Что говорят выпускники наших курсов</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial active">
+                    <div class="testimonial-content">
+                        <p>"Прошёл курс системного администратора и нашёл работу через месяц. Информация подана структурированно, много практики. Особенно понравились лабораторные по Active Directory и настройке групповых политик."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">АИ</div>
+                        <div class="testimonial-info">
+                            <strong>Алексей И.</strong>
+                            <span>Системный администратор, ООО "Технологии"</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"После курса по тестированию веб-приложений смог обнаружить 3 критические уязвимости в системе нашей компании. Руководство оценило, повысили в должности. Большое спасибо за качественные материалы и поддержку!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">МС</div>
+                        <div class="testimonial-info">
+                            <strong>Михаил С.</strong>
+                            <span>Security Specialist, Банк "Инвест"</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"Курс по Linux изменил моё представление о безопасности серверов. Теперь я уверенно настраиваю SSH, брандмауэр, права доступа и регулярно провожу аудит системы. Всем рекомендую, особенно новичкам в Linux."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">ЕА</div>
+                        <div class="testimonial-info">
+                            <strong>Екатерина А.</strong>
+                            <span>DevOps-инженер, IT Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>О нас</h2>
+                <p>Почему стоит выбрать наши курсы по информационной безопасности</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="/assets/images/about-us.jpg" alt="Обучение в InfoSec Academy">
+                </div>
+                <div class="about-text">
+                    <h3>Обучение от практикующих специалистов</h3>
+                    <p>Наша академия информационной безопасности предлагает практические курсы для специалистов разного уровня подготовки. Мы специализируемся на обучении реальным навыкам в сфере кибербезопасности, которые можно сразу применять на практике.</p>
+                    
+                    <h3>Подготовка к международным сертификациям</h3>
+                    <p>Мы готовим к международным сертификациям, таким как OSCP, MCSA, CCNA, LPI и другим. Наши выпускники успешно работают в ИТ-компаниях, банках, государственных учреждениях и коммерческих организациях.</p>
+                    
+                    <h3>Актуальные знания и постоянное обновление</h3>
+                    <p>Все материалы курсов основаны на реальных примерах и актуальных угрозах. Наши инструкторы - практикующие специалисты с богатым опытом работы в сфере информационной безопасности.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">1200+</div>
+                            <div class="stat-label">Выпускников</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">Курсов</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Уроков</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">97%</div>
+                            <div class="stat-label">Трудоустройство</div>
+                        </div>
+                    </div>
+                    
+                    <a href="/pages/about.html" class="btn">Узнать больше о нас</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="cta" class="section section-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Готовы начать обучение?</h2>
+                <p>Присоединяйтесь к нам и станьте профессионалом в сфере информационной безопасности!</p>
+                <div class="cta-buttons">
+                    <a href="/pages/courses.html" class="btn btn-primary">Выбрать курс</a>
+                    <a href="/pages/contact.html" class="btn btn-outline">Связаться с нами</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="footer-container">
+        <!-- Сюда будет загружен компонент подвала -->
+    </footer>
+
+    <div id="back-to-top" title="Наверх">↑</div>
+
+    <!-- Скрипты -->
+    <script src="/js/templates.js"></script>
+                    </div>

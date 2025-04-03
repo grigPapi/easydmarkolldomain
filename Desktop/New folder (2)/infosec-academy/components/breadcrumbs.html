@@ -1,0 +1,49 @@
+<!-- Шаблон хлебных крошек -->
+<div class="container">
+    <nav class="breadcrumbs-nav">
+        <ul class="breadcrumbs-list">
+            <!-- Хлебные крошки будут добавлены динамически через JavaScript -->
+            <li><a href="/index.html">Главная</a></li>
+        </ul>
+    </nav>
+</div>
+
+<style>
+    .breadcrumbs-nav {
+        padding: 0.5rem 0;
+        margin-bottom: 1rem;
+    }
+    
+    .breadcrumbs-list {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .breadcrumbs-list li {
+        display: flex;
+        align-items: center;
+    }
+    
+    .breadcrumbs-list li:not(:last-child)::after {
+        content: "/";
+        margin: 0 0.5rem;
+        color: var(--text-light);
+    }
+    
+    .breadcrumbs-list a {
+        color: var(--secondary-color);
+        text-decoration: none;
+    }
+    
+    .breadcrumbs-list a:hover {
+        text-decoration: underline;
+    }
+    
+    .breadcrumbs-list li:last-child {
+        color: var(--text-color);
+        font-weight: 500;
+    }
+</style>

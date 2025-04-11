@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMARC Domain Scanner</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Сканер безопасности доменов DMARC/SPF/DKIM</h1>
+        
+        <!-- Переключатель темы -->
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="themeSwitch">
+                <input type="checkbox" id="themeSwitch">
+                <span class="slider"></span>
+            </label>
+            <span id="themeSwitchLabel" class="theme-switch-label">Светлая тема</span>
+        </div>
+        
+        <!-- Панель быстрого доступа -->
+        <div class="quick-access">
+            <button id="settingsBtn" class="secondary-btn">Показать настройки</button>
+            <button id="statsBtn" class="secondary-btn">Статистика</button>
+        </div>
+        
+        <!-- Панель настроек -->
+        <div id="settingsPanel" class="settings-panel">
+            <h3>Настройки</h3>
+            <form id="settingsForm">
+                <div class="settings-group">
+                    <label for="apiKeyUsername">Имя пользователя API (скрытое)</label>
+                    <input type="text" id="apiKeyUsername" name="username" autocomplete="username" style="display: none;">
+                    
+                    <label for="apiKey">API ключ EasyDMARC:</label>
+                    <input type="password" id="apiKey" placeholder="Введите API ключ" autocomplete="current-password">
+                </div>
+                <div class="settings-group">
+                    <label>
+                        <input type="checkbox" id="useApi"> Использовать API вместо веб-парсинга
+                    </label>
+                </div>
+                <div class="settings-group">
+                    <label for="requestDelay">Задержка между запросами (мс):</label>
+                    <input type="number" id="requestDelay" min="500" max="5000" step="100" value="1000">
+                </div>
+                <div class="settings-group">
+                    <label for="concurrentRequests">Одновременные запросы:</label>
+                    <input type="number" id="concurrentRequests" min="1" max="10" step="1" value="3">
+                </div>
+                <div class="settings-group">
+                    <label for="logLevel">Уровень логирования:</label>
+                    <select id="logLevel">
+                        <option value="error">Только ошибки</option>
+                        <option value="warn">Предупреждения</option>
+                        <option value="info" selected>Информационный</option>
+                        <option value="debug">Отладка</option>
+                    </select>
+                </div>
+                <div class="settings-group">
+                    <button id="saveSettingsBtn" type="button">Сохранить настройки</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Панель статистики -->
+        <div id="statsPanel" class="stats-panel">
+            <h3>Статистика сканирования</h3>
+            <div id="statisticsContainer">
+                <!-- Здесь будет отображаться статистика -->
+                <p class="empty-state">Проведите сканирование, чтобы увидеть статистику</p>
+            </div>
+        </div>
+        
+        <!-- Зона загрузки файла -->
+        <div class="file-upload" id="fileDropArea">
+            <h3>Загрузить список доменов</h3>
+            <p>Загрузите текстовый файл с доменами (по одному на строку) или перетащите файл сюда</p>
+            <input type="file" id="domainFile" accept=".txt,.csv">
+        </div>
+        
+        <!-- Кнопки управления сканированием -->
+        <div class="scan-controls">
+            <button id="loadBtn" class="primary-btn">Загрузить</button>
+            <button id="scanBtn" class="primary-btn" disabled>Сканировать</button>
+            <button id="stopBtn" class="danger-btn" disabled>Остановить</button>
+        </div>
+        
+        <!-- Прогресс сканирования -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div id="progressText" class="progress-text">Готов к сканированию</div>
+        </div>
+        
+        <!-- Панель фильтров -->
+        <div class="filter-panel">
+            <div>
+                <label for="filterDmarc">DMARC:</label>
+                <select id="filterDmarc">
+                    <option value="all">Все</option>
+                    <option value="ok">Настроен</option>
+                    <option value="warning">Проблемы</option>
+                    <option value="error">Отсутствует</option>
+                </select>
+            </div>
+            <div>
+                <label for="filterSpf">SPF:</label>
+                <select id="filterSpf">
+                    <option value="all">Все</option>
+                    <option value="ok">Настроен</option>
+                    <option value="warning">Проблемы</option>
+                    <option value="error">Отсутствует</option>
+                </select>
+            </div>
+            <div>
+                <label for="filterDkim">DKIM:</label>
+                <select id="filterDkim">
+                    <option value="all">Все</option>
+                    <option value="ok">Настроен</option>
+                    <option value="warning">Проблемы</option>
+                    <option value="error">Отсутствует</option>
+                </select>
+            </div>
+            <div>
+                <label for="filterScore">Мин. оценка:</label>
+                <input type="number" id="filterScore" min="0" max="100" step="10" value="0">
+            </div>
+            <div>
+                <label for="searchDomain">Поиск домена:</label>
+                <input type="text" id="searchDomain" placeholder="example.com">
+            </div>
+        </div>
+        
+        <!-- Таблица результатов -->
+        <div class="results-container">
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th data-sort="domain">Домен</th>
+                        <th data-sort="dmarc">DMARC</th>
+                        <th data-sort="spf">SPF</th>
+                        <th data-sort="dkim">DKIM</th>
+                        <th data-sort="score">Оценка безопасности</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                    <!-- Результаты будут добавлены через JavaScript -->
+                </tbody>
+            </table>
+            
+            <div id="emptyResultsMessage" class="empty-state">
+                Нет результатов для отображения
+            </div>
+        </div>
+        
+        <!-- Кнопки экспорта -->
+        <div class="export-actions">
+            <button class="export-btn" id="exportBtn" disabled>Экспорт результатов (JSON)</button>
+            <button class="export-btn secondary-btn" id="exportPdfBtn" disabled>Экспорт в PDF</button>
+            <button class="export-btn secondary-btn" id="exportCsvBtn" disabled>Экспорт в CSV</button>
+        </div>
+        
+        <!-- Панель логов -->
+        <div class="log-panel">
+            <div class="log-header">
+                <h3>Журнал событий</h3>
+                <div class="log-controls">
+                    <button id="clearLogsBtn" class="small-btn">Очистить</button>
+                    <button id="toggleLogsBtn" class="small-btn">Свернуть</button>
+                </div>
+            </div>
+            <div id="logsContainer" class="logs-container">
+                <!-- Логи будут добавлены через JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Шаблоны для JavaScript -->
+    <template id="logItemTemplate">
+        <div class="log-item">
+            <span class="log-time"></span>
+            <span class="log-level"></span>
+            <span class="log-message"></span>
+        </div>
+    </template>
+    
+    <template id="domainRowTemplate">
+        <tr>
+            <td class="domain-cell"></td>
+            <td class="dmarc-cell"></td>
+            <td class="spf-cell"></td>
+            <td class="dkim-cell"></td>
+            <td class="score-cell"></td>
+            <td class="actions-cell">
+                <button class="detail-btn">Детали</button>
+            </td>
+        </tr>
+    </template>
+    
+    <template id="domainDetailsTemplate">
+        <tr class="details-row">
+            <td colspan="6" class="domain-details">
+                <div class="details-container">
+                    <h4 class="details-domain"></h4>
+                    <div class="details-sections">
+                        <div class="detail-section dmarc-section">
+                            <h5>DMARC</h5>
+                            <p><strong>Статус:</strong> <span class="dmarc-status"></span></p>
+                            <p><strong>Запись:</strong> <span class="dmarc-record"></span></p>
+                            <p><strong>Политика:</strong> <span class="dmarc-policy"></span></p>
+                        </div>
+                        <div class="detail-section spf-section">
+                            <h5>SPF</h5>
+                            <p><strong>Статус:</strong> <span class="spf-status"></span></p>
+                            <p><strong>Запись:</strong> <span class="spf-record"></span></p>
+                        </div>
+                        <div class="detail-section dkim-section">
+                            <h5>DKIM</h5>
+                            <p><strong>Статус:</strong> <span class="dkim-status"></span></p>
+                            <p><strong>Селекторы:</strong> <span class="dkim-selectors"></span></p>
+                        </div>
+                        <div class="detail-section mx-section">
+                            <h5>MX записи</h5>
+                            <div class="mx-records"></div>
+                        </div>
+                        <div class="detail-section recommendations-section">
+                            <h5>Рекомендации</h5>
+                            <div class="recommendations-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </template>
+
+    <!-- Подключение скриптов (в правильном порядке) -->
+    <!-- Базовые утилиты должны загружаться СТРОГО в этом порядке -->
+    <script src="js/utils/logger.js"></script>
+    <script>
+        // Инициализируем глобальный объект DOMUtils перед загрузкой остальных скриптов
+        window.DOMUtils = (function() {
+            const cache = new Map();
+
+            function getById(id) {
+                if (cache.has(id)) {
+                    return cache.get(id);
+                }
+                
+                const element = document.getElementById(id);
+                if (element) {
+                    cache.set(id, element);
+                }
+                
+                return element;
+            }
+            
+            function query(selector, parent = document) {
+                return parent.querySelector(selector);
+            }
+            
+            function queryAll(selector, parent = document) {
+                return parent.querySelectorAll(selector);
+            }
+            
+            function createElement(tag, attributes = {}, content) {
+                const element = document.createElement(tag);
+                
+                Object.entries(attributes).forEach(([key, value]) => {
+                    if (key === 'class' || key === 'className') {
+                        if (Array.isArray(value)) {
+                            element.classList.add(...value.filter(Boolean));
+                        } else if (typeof value === 'string') {
+                            value.split(' ').filter(Boolean).forEach(cls => element.classList.add(cls));
+                        }
+                    } else if (key === 'style' && typeof value === 'object') {
+                        Object.assign(element.style, value);
+                    } else if (key.startsWith('on') && typeof value === 'function') {
+                        const eventName = key.slice(2).toLowerCase();
+                        element.addEventListener(eventName, value);
+                    } else if (value !== null && value !== undefined) {
+                        element.setAttribute(key, value);
+                    }
+                });
+                
+                if (content !== undefined) {
+                    if (typeof content === 'string') {
+                        element.textContent = content;
+                    } else if (content instanceof HTMLElement) {
+                        element.appendChild(content);
+                    } else if (Array.isArray(content)) {
+                        content.forEach(item => {
+                            if (item) {
+                                if (typeof item === 'string') {
+                                    element.textContent += item;
+                                } else if (item instanceof HTMLElement) {
+                                    element.appendChild(item);
+                                }
+                            }
+                        });
+                    }
+                }
+                
+                return element;
+            }
+            
+            function empty(element) {
+                while (element.firstChild) {
+                    element.removeChild(element.firstChild);
+                }
+            }
+            
+            function animationFrame(callback) {
+                return window.requestAnimationFrame(() => {
+                    try {
+                        callback();
+                    } catch (error) {
+                        console.error('Error in animation frame callback', error);
+                    }
+                });
+            }
+            
+            function debounce(func, wait) {
+                let timeout;
+                
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+            
+            function throttle(func, limit) {
+                let inThrottle;
+                
+                return function executedFunction(...args) {
+                    if (!inThrottle) {
+                        func(...args);
+                        inThrottle = true;
+                        setTimeout(() => {
+                            inThrottle = false;
+                        }, limit);
+                    }
+                };
+            }
+            
+            function createFromTemplate(templateId) {
+                const template = getById(templateId);
+                if (!template) {
+                    console.error(`Template with id '${templateId}' not found`);
+                    return document.createDocumentFragment();
+                }
+                
+                return template.content.cloneNode(true);
+            }
+            
+            function clearCache() {
+                cache.clear();
+            }
+            
+            function delegate(element, eventType, selector, handler) {
+                element.addEventListener(eventType, function(event) {
+                    const targetElement = event.target.closest(selector);
+                    
+                    if (targetElement && element.contains(targetElement)) {
+                        handler.call(targetElement, event, targetElement);
+                    }
+                });
+            }
+            
+            function setAttributes(element, attributes) {
+                Object.entries(attributes).forEach(([key, value]) => {
+                    if (value !== null && value !== undefined) {
+                        element.setAttribute(key, value);
+                    } else {
+                        element.removeAttribute(key);
+                    }
+                });
+            }
+            
+            function toggleClass(element, className, condition) {
+                if (condition) {
+                    element.classList.add(className);
+                } else {
+                    element.classList.remove(className);
+                }
+            }
+            
+            function createFromHTML(html) {
+                const template = document.createElement('template');
+                template.innerHTML = html.trim();
+                return template.content.firstChild;
+            }
+            
+            // Публичное API
+            return {
+                getById,
+                query,
+                queryAll,
+                createElement,
+                empty,
+                setAttributes,
+                toggleClass,
+                createFromHTML,
+                animationFrame,
+                createFromTemplate,
+                clearCache,
+                delegate,
+                debounce,
+                throttle
+            };
+        })();
+    
+        console.log('DOMUtils initialized');
+    </script>
+    
+    <script>
+        // Инициализируем глобальный объект EventBus перед загрузкой остальных скриптов
+        window.EventBus = (function() {
+            const listeners = {};
+            const onceListeners = {};
+            
+            function on(event, callback, context = null) {
+                if (typeof callback !== 'function') {
+                    console.error('EventBus.on: callback is not a function', { event, callback });
+                    return () => {};
+                }
+                
+                if (!listeners[event]) {
+                    listeners[event] = [];
+                }
+                
+                const listener = { callback, context };
+                listeners[event].push(listener);
+                
+                console.log(`EventBus: Subscribed to event "${event}"`, { callback: callback.name || 'anonymous' });
+                
+                // Возвращаем функцию для удобной отписки
+                return () => off(event, callback, context);
+            }
+            
+            function once(event, callback, context = null) {
+                if (typeof callback !== 'function') {
+                    console.error('EventBus.once: callback is not a function', { event, callback });
+                    return;
+                }
+                
+                if (!onceListeners[event]) {
+                    onceListeners[event] = [];
+                }
+                
+                onceListeners[event].push({ callback, context });
+                console.log(`EventBus: Subscribed to event "${event}" (once)`, { callback: callback.name || 'anonymous' });
+            }
+            
+            function off(event, callback = null, context = null) {
+                // Если нет слушателей для события, ничего не делаем
+                if (!listeners[event]) {
+                    return;
+                }
+                
+                // Если обработчик не указан, удаляем все обработчики события
+                if (!callback) {
+                    delete listeners[event];
+                    delete onceListeners[event];
+                    console.log(`EventBus: Unsubscribed from all callbacks for event "${event}"`);
+                    return;
+                }
+                
+                // Удаляем указанный обработчик
+                listeners[event] = listeners[event].filter(listener => {
+                    return listener.callback !== callback || (context && listener.context !== context);
+                });
+                
+                // Очищаем onceListeners
+                if (onceListeners[event]) {
+                    onceListeners[event] = onceListeners[event].filter(listener => {
+                        return listener.callback !== callback || (context && listener.context !== context);
+                    });
+                }
+                
+                console.log(`EventBus: Unsubscribed from event "${event}"`, { callback: callback.name || 'anonymous' });
+            }
+            
+            function emit(event, ...args) {
+                console.log(`EventBus: Emitting event "${event}"`, args.length > 0 ? args[0] : null);
+                
+                // Вызываем обычных слушателей
+                if (listeners[event]) {
+                    listeners[event].forEach(listener => {
+                        try {
+                            if (listener.context) {
+                                listener.callback.apply(listener.context, args);
+                            } else {
+                                listener.callback(...args);
+                            }
+                        } catch (error) {
+                            console.error(`Error in event handler for "${event}"`, error);
+                        }
+                    });
+                }
+                
+                // Вызываем one-time слушателей и затем удаляем их
+                if (onceListeners[event]) {
+                    const toCall = [...onceListeners[event]];
+                    onceListeners[event] = [];
+                    
+                    toCall.forEach(listener => {
+                        try {
+                            if (listener.context) {
+                                listener.callback.apply(listener.context, args);
+                            } else {
+                                listener.callback(...args);
+                            }
+                        } catch (error) {
+                            console.error(`Error in once event handler for "${event}"`, error);
+                        }
+                    });
+                }
+            }
+            
+            function getListeners(event) {
+                const regular = listeners[event] || [];
+                const once = onceListeners[event] || [];
+                return [...regular, ...once];
+            }
+            
+            function hasListeners(event) {
+                return (
+                    (listeners[event] && listeners[event].length > 0) ||
+                    (onceListeners[event] && onceListeners[event].length > 0)
+                );
+            }
+            
+            function clearAll() {
+                Object.keys(listeners).forEach(event => {
+                    delete listeners[event];
+                });
+                
+                Object.keys(onceListeners).forEach(event => {
+                    delete onceListeners[event];
+                });
+                
+                console.log('EventBus: All listeners cleared');
+            }
+            
+            return {
+                on,
+                once,
+                off,
+                emit,
+                getListeners,
+                hasListeners,
+                clearAll
+            };
+        })();
+        
+        console.log('EventBus initialized');
+    </script>
+    
+    <script src="js/utils/storage-manager.js"></script>
+    <script src="js/utils/file-utils.js"></script>
+    
+    <!-- Затем сервисы -->
+    <script src="js/services/results-manager.js"></script>
+    <script src="js/services/theme-manager.js"></script>
+    <script src="js/services/dmarc-client.js"></script>
+    <script src="js/services/export-service.js"></script>
+    
+    <!-- Компоненты UI -->
+    <script src="js/ui/ui-manager.js"></script>
+    <script src="js/ui/table-manager.js"></script>
+    <script src="js/ui/filters-manager.js"></script>
+    <script src="js/ui/drag-drop-handler.js"></script>
+    <script src="js/ui/recommendations-manager.js"></script>
+    <script src="js/ui/statistics-manager.js"></script>
+    <script src="js/ui/log-ui-manager.js"></script>
+    
+    <!-- Главный скрипт приложения загружается последним -->
+    <script src="js/app.js"></script>
+
+
+</body>
+</html>
